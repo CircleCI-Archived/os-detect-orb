@@ -23,7 +23,7 @@ commands:
           name: "Init OS Detection"
           command: |
             # Start with family detection.
-            family=$(uname --kernel-name | tr '[:upper:]' '[:lower:]')
+            family=$(uname -s | tr '[:upper:]' '[:lower:]')
 
             case $family in
               linux)
