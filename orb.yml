@@ -9,6 +9,8 @@ description: |
   This orb is especially helpful as a utility for other orbs.
   
   Bash is a requirement. See repository for full documentation.
+  
+  Source - https://github.com/CircleCI-Public/os-detect-orb
 
 commands:
   init:
