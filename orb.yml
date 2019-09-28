@@ -25,6 +25,15 @@ commands:
           name: "Init OS Detection"
           command: |
             # Start with family detection.
+
+            # First, check if Windows family.
+            if [[ -n "$OS" ]] && [[ "$OS" == "Windows_NT" ]]; then
+                # Detected windows family, hand off to the next step for Windows OS detection Powershell to run.
+                # Do not check any further. Short circuit script safely.
+                exit 0
+            fi
+
+            # *NIX based families.
             family=$(uname -s | tr '[:upper:]' '[:lower:]')
 
             case $family in
