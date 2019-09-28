@@ -1,15 +1,15 @@
 version: 2.1
 
 description: |
-  This orb allows for simple detection of which operating system and/or 
-  distribution CircleCI configuration is running in. This information is 
-  useful in order to know which binaries to run, where certain files may be 
+  This orb allows for simple detection of which operating system and/or
+  distribution CircleCI configuration is running in. This information is
+  useful in order to know which binaries to run, where certain files may be
   located in the filesystem, or whether or not using `sudo` is needed.
-  
+
   This orb is especially helpful as a utility for other orbs.
-  
+
   Bash is a requirement. See repository for full documentation.
-  
+
   Source - https://github.com/CircleCI-Public/os-detect-orb
 
 commands:
@@ -68,13 +68,48 @@ commands:
             command -v sudo >/dev/null 2>&1 || { SUDO=""; }
 
             # Export new variables.
-            # This section can be replaced by the possible Bash/envar orb in 
+            # This section can be replaced by the possible Bash/envar orb in
             # the future.
             echo "export OSD_FAMILY=$(echo $family)" >> $BASH_ENV
             echo "export OSD_ID=$(echo $osID)" >> $BASH_ENV
             echo "export OSD_VERSION=$(echo $osVersion)" >> $BASH_ENV
             echo "export SUDO=$(echo $SUDO)" >> $BASH_ENV
+      - run:
+          name: "Init Windows OS Detection"
+          command: |
+            # Checks if the shell is running as an elevated user (Admin)
+            function Test-Administrator
+            {
+                $user = [Security.Principal.WindowsIdentity]::GetCurrent();
+                (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+            }
 
+            Function Get-OSName
+            {
+                (Get-WmiObject Win32_OperatingSystem).Caption
+            }
+
+            function Get-OS-Version
+            {
+                (Get-CimInstance Win32_OperatingSystem).version
+            }
+
+            # Set System level $OSD_FAMILY, get value from default $OS value which
+            # defaults to `Windows_NT`.
+            # see: https://en.wikipedia.org/wiki/Environment_variable#Windows
+            # see: https://en.wikipedia.org/wiki/Windows_NT
+            [Environment]::SetEnvironmentVariable("OSD_FAMILY", $env:OS, "Machine")
+
+            # Set System level $OSD_ID, we know this is Windows for sure.
+            $osName = Get-OSName
+            [Environment]::SetEnvironmentVariable("OSD_ID", $osName, "Machine")
+
+            $osVersion = Get-OS-Version
+            [Environment]::SetEnvironmentVariable("OSD_VERSION", $osVersion, "Machine")
+
+            $isSudo = Test-Administrator
+            [Environment]::SetEnvironmentVariable("SUDO", $isSudo, "Machine")
+          shell: powershell.exe
 
 examples:
   detect-os:
@@ -98,7 +133,7 @@ examples:
                       osVersion=$(grep -e "^DISTRIB_RELEASE=" /etc/lsb-release | cut -c17-)
                       if [ $OSD_ID == "alpine" ]; then
                         # Here is where you would install an Alpine specific binary.
-                        # This might be the case because Alpine doesn't have the 
+                        # This might be the case because Alpine doesn't have the
                         # same libs as most Linux distros.
                       else
                         # Here is where you would install generic Linux binaries.
