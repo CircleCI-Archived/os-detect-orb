@@ -1,4 +1,4 @@
-# OS Detect Orb [![CircleCI Build Status](https://circleci.com/gh/CircleCI-Public/os-detect-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/CircleCI-Public/os-detect-orb) [![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/circleci/os-detect)][reg-page] [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/CircleCI-Public/os-detect-orb/master/LICENSE)
+# OS Detect Orb [![CircleCI Build Status](https://circleci.com/gh/CircleCI-Public/os-detect-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/CircleCI-Public/os-detect-orb) [![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/circleci/os-detect)][reg-page] [![MIT Licensed](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/CircleCI-Public/os-detect-orb/master/LICENSE)
 
 An orb to make it easy to detect which operating system (OS) and version your orb and/or CircleCI config is running in.
 
