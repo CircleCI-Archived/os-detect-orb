@@ -27,7 +27,7 @@ $SUDO = Contains the string "sudo" when the current user is not root and the `su
 
 ## Resources
 
-[CircleCI Orb Registry Page][reg-page] - The official registry page for this orb will include all versions, executors, commands, and have jobs described.  
+[CircleCI Orb Registry Page][reg-page] - The official registry page for this orb will include all versions, executors, commands, and have described the jobs.  
 [CircleCI Orb Docs](https://circleci.com/docs/2.0/orb-intro/#section=configuration) - Docs for using and creating CircleCI Orbs.  
 
 
