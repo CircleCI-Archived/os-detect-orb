@@ -15,11 +15,6 @@ description: |
 commands:
   init:
     description: "Run OS detection and initialize environment variables."
-    parameters:
-      extended:
-        description: "Install the Hugo extended binary?"
-        type: boolean
-        default: true
     steps:
       - run:
           name: "Init OS Detection"
