@@ -1,0 +1,13 @@
+version: 2.1
+
+description: |
+  This orb allows for simple detection of which operating system and/or 
+  distribution CircleCI configuration is running in. This information is 
+  useful in order to know which binaries to run, where certain files may be 
+  located in the filesystem, or whether or not using `sudo` is needed.
+  
+  This orb is especially helpful as a utility for other orbs.
+  
+  Bash is a requirement. See repository for full documentation.
+  
+  Source - https://github.com/CircleCI-Public/os-detect-orb
