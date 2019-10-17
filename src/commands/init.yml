@@ -1,0 +1,56 @@
+description: "Run OS detection and initialize environment variables."
+parameters:
+  extended:
+    description: "Install the Hugo extended binary?"
+    type: boolean
+    default: true
+steps:
+  - run:
+      name: "Init OS Detection"
+      command: |
+        # Start with family detection.
+        family=$(uname -s | tr '[:upper:]' '[:lower:]')
+        case $family in
+          linux)
+            osID=$(grep -e "^ID=" /etc/os-release | cut -c4-)
+            ;;
+          darwin)
+            osID=macos
+            ;;
+          *)
+            echo "Unsupported operating system."
+            exit 1
+            ;;
+        esac
+        # Version number
+        case $osID in
+          ubuntu)
+            osVersion=$(grep -e "^DISTRIB_RELEASE=" /etc/lsb-release | cut -c17-)
+            ;;
+          debian)
+            osVersion=$(cat /etc/debian_version)
+            ;;
+          alpine)
+            osVersion=$(cat /etc/alpine-release)
+            ;;
+          macos)
+            osVersion=$(sw_vers -productVersion)
+            ;;
+          *)
+            echo "Unsupported operating system ID."
+            exit 1
+            ;;
+        esac
+        # Determine if sudo is available and/or neccessary
+        SUDO=""
+        if [[ $EUID -ne 0 ]]; then
+          SUDO=sudo
+        fi
+        command -v sudo >/dev/null 2>&1 || { SUDO=""; }
+        # Export new variables.
+        # This section can be replaced by the possible Bash/envar orb in 
+        # the future.
+        echo "export OSD_FAMILY=$(echo $family)" >> $BASH_ENV
+        echo "export OSD_ID=$(echo $osID)" >> $BASH_ENV
+        echo "export OSD_VERSION=$(echo $osVersion)" >> $BASH_ENV
+        echo "export SUDO=$(echo $SUDO)" >> $BASH_ENV
