@@ -17,12 +17,12 @@ CircleCI Support
 
 Example use as well as a list of available executors, commands, and jobs are available on this orb's [registry page][reg-page].
 
-Variables
-
-$OSD_FAMILY = The OS family. For example, linux or darwin.
-$OSD_ID = The OS slug name. For example, ubuntu, alpine or macos.
-$OSD_VERSION = The OS version number, as advertised. For example, 18.04 for Ubuntu or 10.9 for macOS.
-$SUDO = Contains the string "sudo" when the current user is not root and the `sudo` binary is available. Prefix this with your commands.
+| Variables     | Description |
+|---            |---          |
+| $OSD_FAMILY   | The OS family. For example, linux or darwin
+| $OSD_ID       | The OS slug name. For example, ubuntu, alpine or macos.
+| $OSD_VERSION  | The OS version number, as advertised. For example, 18.04 for Ubuntu or 10.9 for macOS.
+| $SUDO         | Contains the string "sudo" when the current user is not root and the `sudo` binary is available. Prefix this with your commands.
 
 
 ## Resources
