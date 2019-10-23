@@ -39,6 +39,7 @@ For further questions/comments about this or other orbs, visit the Orb Category 
 
 New versions of this orb are published by pushing a SemVer git tag by the Community & Partner Engineering Team.
 
-
+## License
+This project is licensed under the MIT License - read [LICENSE](LICENSE) file for details.
 
 [reg-page]: https://circleci.com/orbs/registry/orb/circleci/orb-detect
