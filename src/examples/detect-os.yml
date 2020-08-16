@@ -18,7 +18,7 @@ usage:
                   osVersion=$(grep -e "^DISTRIB_RELEASE=" /etc/lsb-release | cut -c17-)
                   if [ $OSD_ID == "alpine" ]; then
                     # Here is where you would install an Alpine specific binary.
-                    # This might be the case because Alpine doesn't have the 
+                    # This might be the case because Alpine doesn't have the
                     # same libs as most Linux distros.
                   else
                     # Here is where you would install generic Linux binaries.

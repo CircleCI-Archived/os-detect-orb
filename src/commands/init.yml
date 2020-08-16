@@ -48,7 +48,7 @@ steps:
         fi
         command -v sudo >/dev/null 2>&1 || { SUDO=""; }
         # Export new variables.
-        # This section can be replaced by the possible Bash/envar orb in 
+        # This section can be replaced by the possible Bash/envar orb in
         # the future.
         echo "export OSD_FAMILY=$(echo $family)" >> $BASH_ENV
         echo "export OSD_ID=$(echo $osID)" >> $BASH_ENV
