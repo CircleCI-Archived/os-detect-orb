@@ -1,0 +1,35 @@
+description: "Here's how you would use the OS Detect Orb."
+usage:
+  version: 2.1
+  orbs:
+    detect: circleci/os-detect@0.3.0
+  jobs:
+    build:
+      docker:
+        - image: cibuilds/base
+      steps:
+        - detect/init
+        - run: echo "The current operating system is ${OSD_ID}."
+        - run:
+            name: "Install the binary for X"
+            command: |
+              case $OSD_FAMILY in
+                linux)
+                  osVersion=$(grep -e "^DISTRIB_RELEASE=" /etc/lsb-release | cut -c17-)
+                  if [ $OSD_ID == "alpine" ]; then
+                    # Here is where you would install an Alpine specific binary.
+                    # This might be the case because Alpine doesn't have the
+                    # same libs as most Linux distros.
+                  else
+                    # Here is where you would install generic Linux binaries.
+                  fi
+                  ;;
+                darwin)
+                  osVersion=$(sw_vers -productVersion)
+                  # Here is where you would install a macOS binary.
+                  ;;
+                *)
+                  echo "Unsupported Operating System."
+                  exit 1
+                  ;;
+              esac
