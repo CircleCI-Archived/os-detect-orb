@@ -2,7 +2,7 @@ description: "Here's how you would use the OS Detect Orb."
 usage:
   version: 2.1
   orbs:
-    detect: circleci/os-detect@0.1
+    detect: circleci/os-detect@0.3.0
   jobs:
     build:
       docker:
