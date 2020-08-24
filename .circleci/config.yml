@@ -58,7 +58,7 @@ workflows:
       # e.g. [semver:patch] will cause a patch version to be published.
       - orb-tools/dev-promote-prod-from-commit-subject:
           orb-name: circleci/os-detect
-          ssh-fingerprints: 78:6e:5f:76:b3:ce:b5:07:f7:d9:0e:6a:49:5a:d3:dd
+          ssh-fingerprints: 57:1a:3c:2c:a7:59:d6:a2:74:1f:17:0c:50:a8:25:ad
           context: orb-publishing
           add-pr-comment: true
           fail-if-semver-not-indicated: true
