@@ -30,7 +30,7 @@ workflows:
       # store CIRCLE_TOKEN as a project env var or Contexts resource
       # if using Contexts, add your context below
       - orb-tools/publish-dev:
-          context: orb-publishing
+          context: orb-publisher
           orb-name: circleci/os-detect
           requires:
             - orb-tools/pack
@@ -39,7 +39,7 @@ workflows:
       # dev:${CIRCLE_SHA1:0:7} version of your orb
       - orb-tools/trigger-integration-tests-workflow:
           name: trigger-integration-dev
-          context: orb-publishing
+          context: orb-publisher
           requires:
             - orb-tools/publish-dev
 
@@ -59,7 +59,8 @@ workflows:
       - orb-tools/dev-promote-prod-from-commit-subject:
           orb-name: circleci/os-detect
           ssh-fingerprints: 57:1a:3c:2c:a7:59:d6:a2:74:1f:17:0c:50:a8:25:ad
-          context: orb-publishing
+          context: orb-publisher
+          bot-user: orb-publisher
           add-pr-comment: true
           fail-if-semver-not-indicated: true
           publish-version-tag: true
